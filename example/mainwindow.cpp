@@ -65,12 +65,29 @@
 #include <QToolBar>
 
 #include <Qsci/qsciscintilla.h>
+#include <Qsci/qscilexerjson.h>
+#include <Qsci/qsciapis.h>
 
 #include "mainwindow.h"
 
 MainWindow::MainWindow()
 {
+    // JSON Lexer
+    QsciLexerJSON* jsonLexer = new QsciLexerJSON();
+
+    QsciAPIs *apis = new QsciAPIs(jsonLexer);
+    apis->add(QString("{"));
+    apis->prepare();
+
     textEdit = new QsciScintilla;
+    textEdit->setLexer(jsonLexer);
+    textEdit->setMarginType(0, QsciScintilla::NumberMargin);
+    textEdit->setMarginLineNumbers(0,true);
+    textEdit->setMarginWidth(0,15);
+    textEdit->setAutoCompletionSource(QsciScintilla::AcsAll);
+    textEdit->setAutoCompletionCaseSensitivity(true);
+    textEdit->setAutoCompletionThreshold(1);
+
     setCentralWidget(textEdit);
 
     createActions();

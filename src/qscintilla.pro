@@ -66,6 +66,8 @@ unix:!macx {
     CONFIG += c++11
 }
 
+DESTDIR  = $$PWD/../bin
+
 # Comment this in if you want the internal Scintilla classes to be placed in a
 # Scintilla namespace rather than pollute the global namespace.
 #DEFINES += SCI_NAMESPACE
